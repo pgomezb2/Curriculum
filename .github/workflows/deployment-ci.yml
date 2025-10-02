@@ -1,0 +1,23 @@
+name: Desplegar en GitHub Pages
+on:
+    push:
+        branches: [main]
+    pull_request: 
+        branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./Curriculum     # Carpeta que contiene tu index.html
+          destination_dir: /            # Esto sube los archivos directamente a la raíz de gh-pages
+          allow_empty_commit: true      # Evita errores si no hay cambios
+          keep_files: false   
